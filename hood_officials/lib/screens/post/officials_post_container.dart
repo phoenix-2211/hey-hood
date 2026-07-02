@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hood_officials/core/constants/app_colors.dart';
 import 'package:hood_officials/services/firestore_service.dart';
 import 'package:hood_officials/models/models.dart' as model;
+import 'package:hood_officials/services/agent_service.dart';
 
 class OfficialsPostContainer extends StatefulWidget {
   final int initialTab; // 0 for Resolve, 1 for Report
@@ -571,6 +572,55 @@ class _OfficialsPostContainerState extends State<OfficialsPostContainer> {
             ),
           ),
         ),
+        const SizedBox(height: 6),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () async {
+              final rawText = _workDoneController.text.trim();
+              if (rawText.isNotEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('AI is polishing your description...'),
+                    duration: Duration(seconds: 4),
+                  ),
+                );
+                final polished = await AgentService.polishText(
+                  rawText: rawText,
+                  context: 'issue',
+                );
+                setState(() {
+                  _workDoneController.text = polished;
+                });
+                if (mounted) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Description polished! ✦'),
+                      backgroundColor: green,
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please enter a description first'),
+                    backgroundColor: danger,
+                  ),
+                );
+              }
+            },
+            child: Text(
+              'Fix with AI ✦',
+              style: GoogleFonts.hankenGrotesk(
+                color: saffron,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ),
         const SizedBox(height: 32),
 
         // Mark as Resolved button
@@ -936,6 +986,55 @@ class _OfficialsPostContainerState extends State<OfficialsPostContainer> {
                 },
               ),
             ],
+          ),
+        ),
+        const SizedBox(height: 6),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () async {
+              final rawText = _messageController.text.trim();
+              if (rawText.isNotEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('AI is polishing your message...'),
+                    duration: Duration(seconds: 4),
+                  ),
+                );
+                final polished = await AgentService.polishText(
+                  rawText: rawText,
+                  context: 'post',
+                );
+                setState(() {
+                  _messageController.text = polished;
+                });
+                if (mounted) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Message polished! ✦'),
+                      backgroundColor: green,
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please enter a message first'),
+                    backgroundColor: danger,
+                  ),
+                );
+              }
+            },
+            child: Text(
+              'Fix with AI ✦',
+              style: GoogleFonts.hankenGrotesk(
+                color: saffron,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 24),
