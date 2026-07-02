@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 
 class AgentService {
   // Base URLs for Railway services (updated during deployment)
-  static const String _duplicateUrl = 'https://hey-hood-duplicate-detection.up.railway.app';
-  static const String _textPolishUrl = 'https://hey-hood-text-polish.up.railway.app';
-  static const String _fakeNewsUrl = 'https://hey-hood-fake-news.up.railway.app';
-  static const String _issueRoutingUrl = 'https://hey-hood-issue-routing.up.railway.app';
-  static const String _wishMatchingUrl = 'https://hey-hood-wish-matching.up.railway.app';
+  static const String _duplicateUrl = 'https://hey-hood-agent-duplicate-detection.vercel.app';
+  static const String _textPolishUrl = 'https://hey-hood-agent-text-polish-5n2p.vercel.app';
+  static const String _fakeNewsUrl = 'https://hey-hood-agent-fake-news.vercel.app';
+  static const String _issueRoutingUrl = 'https://hey-hood-agent-issue-routing.vercel.app';
+  static const String _wishMatchingUrl = 'https://hey-hood-agent-wish-matching.vercel.app';
 
   static const Map<String, String> _headers = {
     'Content-Type': 'application/json',
