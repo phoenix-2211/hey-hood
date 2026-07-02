@@ -4,6 +4,7 @@ import 'package:hey_hood/core/constants/app_colors.dart';
 import 'package:hey_hood/screens/auth/otp_screen.dart';
 import 'package:hey_hood/screens/auth/aadhaar_verification_screen.dart';
 import 'package:hey_hood/services/auth_service.dart';
+import 'package:hey_hood/screens/home/home_dashboard.dart';
 
 class VerifyPhoneScreen extends StatefulWidget {
   const VerifyPhoneScreen({super.key});
@@ -16,14 +17,15 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   final TextEditingController _phoneController = TextEditingController(text: "98765 43210");
 
   void _onSkip() {
-    Navigator.of(context).push(
+    Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const AadhaarVerificationScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) => const HomeDashboard(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },
         transitionDuration: const Duration(milliseconds: 400),
       ),
+      (route) => false,
     );
   }
 

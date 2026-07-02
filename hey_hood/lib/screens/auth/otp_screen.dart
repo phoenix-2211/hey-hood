@@ -5,6 +5,7 @@ import 'package:hey_hood/screens/auth/create_profile_screen.dart';
 import 'package:hey_hood/screens/auth/aadhaar_verification_screen.dart';
 import 'package:hey_hood/services/auth_service.dart';
 import 'package:hey_hood/services/firestore_service.dart';
+import 'package:hey_hood/screens/home/home_dashboard.dart';
 
 class OtpScreen extends StatefulWidget {
   final String verificationId;
@@ -19,6 +20,19 @@ class _OtpScreenState extends State<OtpScreen> {
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
   bool _isVerifying = false;
   bool _showSuccess = false;
+
+  void _onSkip() {
+    Navigator.of(context).pushAndRemoveUntil(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => const HomeDashboard(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+        transitionDuration: const Duration(milliseconds: 400),
+      ),
+      (route) => false,
+    );
+  }
 
   @override
   void dispose() {
@@ -168,7 +182,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: _onVerify,
+                      onPressed: _onSkip,
                       child: Text(
                         'SKIP',
                         style: GoogleFonts.hankenGrotesk(
