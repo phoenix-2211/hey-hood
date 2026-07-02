@@ -64,8 +64,13 @@ class AgentService {
       
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        if (data['result'] != null && data['result']['polished_result'] != null && data['result']['polished_result']['polished_text'] != null) {
-          return data['result']['polished_result']['polished_text'];
+        if (data['result'] != null) {
+          if (data['result']['polished_text'] != null) {
+            return data['result']['polished_text'];
+          }
+          if (data['result']['polished_result'] != null && data['result']['polished_result']['polished_text'] != null) {
+            return data['result']['polished_result']['polished_text'];
+          }
         }
       }
       return rawText;
