@@ -618,7 +618,7 @@ class _OfficialsPostContainerState extends State<OfficialsPostContainer> {
               }
             },
             child: Text(
-              'Fix with AI ✦',
+              'Polish with AI ✦',
               style: GoogleFonts.hankenGrotesk(
                 color: saffron,
                 fontWeight: FontWeight.bold,
@@ -1034,7 +1034,7 @@ class _OfficialsPostContainerState extends State<OfficialsPostContainer> {
               }
             },
             child: Text(
-              'Fix with AI ✦',
+              'Polish with AI ✦',
               style: GoogleFonts.hankenGrotesk(
                 color: saffron,
                 fontWeight: FontWeight.bold,

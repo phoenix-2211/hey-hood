@@ -509,7 +509,7 @@ class _ReportIssueModalState extends State<ReportIssueModal> {
                         }
                       },
                       child: Text(
-                        'Fix with AI ✦',
+                        'Polish with AI ✦',
                         style: GoogleFonts.hankenGrotesk(
                           color: saffron,
                           fontWeight: FontWeight.bold,
