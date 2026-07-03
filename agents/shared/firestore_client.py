@@ -31,6 +31,8 @@ if not firebase_admin._apps:
                     cred_json_clean = parts[0] + "-----BEGIN PRIVATE KEY-----" + key_body + "-----END PRIVATE KEY-----" + key_parts[1]
                 cred_dict = json.loads(cred_json_clean)
                 
+            if "private_key" in cred_dict:
+                cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
             cred = credentials.Certificate(cred_dict)
             firebase_admin.initialize_app(cred)
         except Exception as e:
