@@ -19,6 +19,14 @@ if not firebase_admin._apps:
             if cred_json_clean.startswith('"') and cred_json_clean.endswith('"'):
                 cred_json_clean = cred_json_clean[1:-1]
                 
+            # If the credentials string is Base64 encoded, decode it back to raw JSON
+            if cred_json_clean and not cred_json_clean.startswith("{"):
+                import base64
+                try:
+                    cred_json_clean = base64.b64decode(cred_json_clean).decode("utf-8").strip()
+                except Exception as b64_err:
+                    raise ValueError(f"Failed to decode Base64 credentials: {b64_err}")
+                
             # Try to fix literal newlines in private key if pasted as a multiline string
             try:
                 cred_dict = json.loads(cred_json_clean)
