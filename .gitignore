@@ -3,6 +3,8 @@
 firebase_credentials.json
 *-firebase-adminsdk-*.json
 hey-hood-prod-*.json
+hazel-pillar-*.json
+recovery-codes.txt
 .dart_tool/
 build/
 *.g.dart
